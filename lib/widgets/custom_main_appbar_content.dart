@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import '../widgets/custom_movies_button.dart';
 import 'package:sizer/sizer.dart';
@@ -60,20 +62,20 @@ class _CustomMainAppBarContentState extends State<CustomMainAppBarContent> {
       children: [
         ListTile(
           title: Text(widget.title, style: kAppBarTitleTextStyle),
-          trailing: (widget.showSlider)
-              ? IconButton(
-                  onPressed: () {
-                    widget.searchOnPressed!();
-                  },
-                  icon: Icon(Icons.search, size: 22.sp),
-                )
-              : null,
+          // trailing: (widget.showSlider)
+          //     ? IconButton(
+          //         onPressed: () {
+          //           widget.searchOnPressed!();
+          //         },
+          //         icon: Icon(Icons.search, size: 22.sp),
+          //       )
+          //     : null,
         ),
         SizedBox(height: 3.h),
         if (widget.showSlider)
           if (widget.activeButtonIndex != null)
             SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 2.0.h, left: 4.w),

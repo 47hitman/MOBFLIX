@@ -7,7 +7,7 @@ import '../utils/file_manager.dart' as file;
 
 class DrawerScreen extends StatelessWidget {
   final Function(Color) colorChanged;
-  DrawerScreen({required this.colorChanged});
+  const DrawerScreen({required this.colorChanged});
 
   @override
   Widget build(BuildContext context) {

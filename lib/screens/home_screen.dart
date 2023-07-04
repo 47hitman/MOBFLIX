@@ -1,9 +1,9 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
 import '../screens/drawer_screen.dart';
-import '../screens/finder_screen.dart';
 import '../utils/constants.dart';
 import '../utils/file_manager.dart' as file;
-import '../utils/navi.dart' as navi;
 import '../utils/scroll_top_with_controller.dart' as scrollTop;
 import '../utils/toast_alert.dart' as alert;
 import '../widgets/bottom_navigation.dart';
@@ -15,7 +15,6 @@ import '../widgets/movie_card_container.dart';
 import '../widgets/shadowless_floating_button.dart';
 import 'package:sizer/sizer.dart';
 import '../services/movie.dart';
-import '../screens/home_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   //for custom drawer opening
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   //for scroll upping
   ScrollController? _scrollController;
   bool showBackToTopButton = false;
@@ -73,7 +72,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     () async {
       themeColor = await file.currentTheme();
-      print(themeColor);
+      // print(themeColor);
       _scrollController = ScrollController()
         ..addListener(() {
           setState(() {
@@ -104,6 +103,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               backgroundColor: kAppBarColor,
               shadowColor: Colors.transparent,
               bottom: PreferredSize(
+                preferredSize:
+                    Size.fromHeight((bottomBarIndex == 1) ? 16.0.h : 7.h),
                 child: CustomMainAppBarContent(
                   showSlider: showSlider,
                   title: title,
@@ -113,21 +114,14 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   buttonSecondOnPressed: (index) =>
                       movieCategorySwitcher(index),
                   buttonThirdOnPressed: (index) => movieCategorySwitcher(index),
-                  searchOnPressed: () => navi.newScreen(
-                    context: context,
-                    newScreen: () => FinderScreen(
-                      themeColor: themeColor!,
-                    ),
-                  ),
+                  searchOnPressed: null,
                 ),
-                preferredSize:
-                    Size.fromHeight((bottomBarIndex == 1) ? 16.0.h : 7.h),
               ),
             ),
             body: (_movieCards == null)
                 ? CustomLoadingSpinKitRing(loadingColor: themeColor)
-                : (_movieCards!.length == 0)
-                    ? Center(child: Text(k404Text))
+                : (_movieCards!.isEmpty)
+                    ? const Center(child: Text(k404Text))
                     : MovieCardContainer(
                         scrollController: _scrollController!,
                         themeColor: themeColor!,
@@ -137,20 +131,21 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               activeColor: themeColor!,
               index: bottomBarIndex,
               children: [
+                // BottomNavigationItem(
+                //   icon: const Icon(Icons.more_horiz),
+                //   iconSize: 35.sp,
+                //   onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+                // ),
+
                 BottomNavigationItem(
-                  icon: Icon(Icons.more_horiz),
-                  iconSize: 35.sp,
-                  onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-                ),
-                BottomNavigationItem(
-                  icon: Icon(Icons.videocam),
+                  icon: const Icon(Icons.videocam),
                   iconSize: 28.sp,
                   onPressed: () {
                     pageSwitcher(1);
                   },
                 ),
                 BottomNavigationItem(
-                    icon: Icon(Icons.bookmark_sharp),
+                    icon: const Icon(Icons.bookmark_sharp),
                     iconSize: 23.sp,
                     onPressed: () {
                       pageSwitcher(2);

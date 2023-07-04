@@ -12,6 +12,7 @@ const kThemoviedbImageURL = "https://image.tmdb.org/t/p/w300";
 const kHomeScreenButtonFirstText = "Populars";
 const kHomeScreenButtonSecondText = "Coming Soon";
 const kHomeScreenButtonThirdText = "Top Rated";
+const kHomeScreenButtonFourText = "Now Playing";
 const kHomeScreenTitleText = "Watch Now";
 const k404Text = "Movies not found";
 const kFavoriteRemovedText = "Movie removed from Favorites";

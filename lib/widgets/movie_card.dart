@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures, sized_box_for_whitespace, prefer_is_empty
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../model/movie_preview.dart';
@@ -40,6 +42,12 @@ class MovieCard extends StatelessWidget {
         child: Stack(
           children: [
             Container(
+              height: 30.h,
+              width: 40.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.w),
+                color: Colors.black,
+              ),
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5.2.w),
@@ -67,12 +75,6 @@ class MovieCard extends StatelessWidget {
                             ],
                           )),
                 ),
-              ),
-              height: 30.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.w),
-                color: Colors.black,
               ),
             ),
             Positioned.fill(
