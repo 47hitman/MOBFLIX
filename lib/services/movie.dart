@@ -54,44 +54,6 @@ class MovieModel {
     return Future.value(temp);
   }
 
-  Future<List<MovieCard>> searchMovies({
-    required String movieName,
-    required Color themeColor,
-  }) async {
-    List<MovieCard> temp = [];
-
-    var data = await _getData(
-      url:
-          '$kThemoviedbSearchURL/?api_key=${secret.themoviedbApi}&language=en-US&page=1&include_adult=false&query=$movieName',
-    );
-
-    for (var item in data["results"]) {
-      try {
-        temp.add(
-          MovieCard(
-            moviePreview: MoviePreview(
-              isFavorite:
-                  await isMovieInFavorites(movieID: item["id"].toString()),
-              year: (item["release_date"].toString().length > 4)
-                  ? item["release_date"].toString().substring(0, 4)
-                  : "",
-              imageUrl: "https://image.tmdb.org/t/p/w500${item["poster_path"]}",
-              title: item["title"],
-              id: item["id"].toString(),
-              rating: item["vote_average"].toDouble(),
-              overview: item["overview"],
-            ),
-            themeColor: themeColor,
-          ),
-        );
-      } catch (e, s) {
-        print(s);
-        print(item["release_date"]);
-      }
-    }
-    return Future.value(temp);
-  }
-
   Future<MovieDetails> getMovieDetails({required String movieID}) async {
     var data = await _getData(
       url:

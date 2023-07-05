@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'splash_screen.dart';
 import 'utils/constants.dart';
 import 'screens/home_screen.dart';
 
@@ -20,9 +21,13 @@ class MyApp extends StatelessWidget {
             primaryColor: kPrimaryColor,
             scaffoldBackgroundColor: kPrimaryColor,
           ),
-          home: HomeScreen(
-            key: kHomeScreenKey,
-          ),
+
+          home: SplashScreen(), // Set the SplashScreen as the initial route
+          routes: {
+            '/home': (context) => HomeScreen(
+                  key: kHomeScreenKey,
+                ), // Add the HomeScreen route
+          },
         );
       },
     );
